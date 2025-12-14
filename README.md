@@ -17,7 +17,7 @@ This is optional but highly recommended. You'll include one interesting insight 
 
 
 Rocket League pro player earnings data: https://www.esportsearnings.com/games/409-rocket-league
-Rocket League pro player in-game stats: 
+Rocket League pro player in-game stats: https://docs.google.com/spreadsheets/d/1XeDEL-1jZ-P4gTezOREV11O4bRiFXlBXRhc1tXSPx1g/edit?gid=139406561#gid=139406561
 
 Be sure to list where you got any data used within the project. Be sure to acknowledge any one whose work or elements you're drawing upon.
 
