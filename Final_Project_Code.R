@@ -6,6 +6,11 @@
 library(tidyverse)
 library(googlesheets4)
 library(rvest)
+<<<<<<< Updated upstream
+=======
+library(knitr)
+library(kableExtra)
+>>>>>>> Stashed changes
 
 # Use googlesheets4 library to import pro player in-game stats
 gs4_deauth()
@@ -31,25 +36,50 @@ earnings_raw <- read_html(
 ) %>%
   html_element(css = "table") %>%
   html_table()
+<<<<<<< Updated upstream
 
 # Perform an inner join on raw earnings data and raw in-game stats by player
 result_data <- inner_join(combined, earnings_raw, by = c("Player" = "Player ID"))
+=======
+View(earnings_raw)
+
+# Perform an inner join on raw earnings data and raw in-game stats by player
+result <- inner_join(combined, earnings_raw, by = c("Player" = "Player ID"))
+>>>>>>> Stashed changes
 
 
 # Code Chunk 2 - Wrangle and Clean Combined Data
 # Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 
 # Clean data
+<<<<<<< Updated upstream
 result_clean <- result_data %>%
+=======
+result_clean <- result %>%
+>>>>>>> Stashed changes
   # Coalesce 2 columns whose values represent the same stat
   mutate(Demo...19 = coalesce(Demo...19, Demos)) %>%
   # Select necessary columns to keep for analysis
   select(Player, GP, Score...14, Goal...15, Assist...16, Save...17, Shot...18,
          Demo...19, `Shot %`, `Total (Overall)`) %>%
   # Rename all columns for tidyness and readability
+<<<<<<< Updated upstream
   setNames(c("Player", "Games_Played", "Avg_Score", "Avg_Goal", 
              "Avg_Assist", "Avg_Save", "Avg_Shot", "Avg_Demo", 
              "Shot_Percentage", "Total_Earnings")) %>%
+=======
+  rename(
+    Games_Played     = GP,
+    Avg_Score        = Score...14,
+    Avg_Goal         = Goal...15,
+    Avg_Assist       = Assist...16,
+    Avg_Save         = Save...17,
+    Avg_Shot         = Shot...18,
+    Avg_Demo         = Demo...19,
+    Shot_Percentage  = `Shot %`,
+    Total_Earnings   = `Total (Overall)`
+  )  %>%
+>>>>>>> Stashed changes
   # Format earnings to remove dollar sign and be numeric
   mutate(
     Total_Earnings = str_remove_all(Total_Earnings, "[$,]"),
@@ -57,7 +87,75 @@ result_clean <- result_data %>%
   )
 
 
+<<<<<<< Updated upstream
 # Code Chunk 3 - Exploratory Data Analysis 1
+=======
+# Code Chunk 3 - [Add description here]
+# Written by: Kevin Poonthanomsook, Reviewed by: Arhaan Keshwani
+
+# Select all columns except 'Player', then reshape data from wide to long format
+summaryStats <- result_clean %>%
+  select(-Player) %>%  # Remove Player column for summary statistics
+  pivot_longer(
+    cols = everything(),          # Pivot all remaining columns
+    names_to = "Variable",        # New column name for original column names
+    values_to = "Value"           # New column name for values
+  ) %>% 
+  group_by(Variable) %>%          # Group data by each variable
+  summarise(
+    Mean   = mean(Value, na.rm = TRUE),    # Calculate mean
+    SD     = sd(Value, na.rm = TRUE),      # Calculate standard deviation
+    Min    = min(Value, na.rm = TRUE),     # Calculate minimum value
+    Q1     = quantile(Value, 0.25, na.rm = TRUE),  # Calculate 1st quartile
+    Median = median(Value, na.rm = TRUE),  # Calculate median value
+    Q3     = quantile(Value, 0.75, na.rm = TRUE),  # Calculate 3rd quartile
+    Max    = max(Value, na.rm = TRUE),     # Calculate maximum value
+    .groups = "drop"                       # Ungroup after summarising
+  ) %>%
+  mutate(
+    # Recode variable names to more readable descriptions
+    Variable = recode(
+      Variable,
+      Games_Played    = "Games Played",
+      Avg_Score       = "Average Score",
+      Avg_Goal        = "Average Goals",
+      Avg_Assist      = "Average Assists",
+      Avg_Save        = "Average Saves",
+      Avg_Shot        = "Average Shots",
+      Shot_Percentage = "Shot Percentage",
+      Total_Earnings  = "Total Earnings ($)"
+    )
+  ) %>%
+  mutate(
+    # Round all numeric summary statistics to 3 decimal places
+    across(where(is.numeric), ~ round(.x, 3))
+  )
+
+# Format the numeric values for display by applying commas for currency and fixed decimals for others
+summaryStats %>%
+  mutate(
+    across(
+      where(is.numeric),
+      ~ ifelse(Variable == "Total Earnings ($)",
+               scales::comma(.x),        # Add commas for thousands in currency values
+               format(.x, nsmall = 3))  # Format other numbers with 3 decimal places
+    )
+  ) %>%
+  # Create a table with caption and alignment
+  kable(
+    format = "html",
+    caption = "Summary Statistics for Rocket League Player Performance",
+    align = "lccccccc"
+  ) %>%
+  # Add Bootstrap styling to the table for better appearance
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
+
+
+# Code Chunk 4 - Exploratory Data Analysis 1
+>>>>>>> Stashed changes
 # Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 
 # Plot a scatterplot of average score vs. total earnings with a best fit line
@@ -75,6 +173,11 @@ ggplot(result_clean, aes(x = Avg_Score, y = Total_Earnings)) +
   # Create line of best fit for scatter
   geom_smooth(method = "lm", se = FALSE, color = "red")
 
+<<<<<<< Updated upstream
+=======
+# Plot a scatterplot of average goal vs. total earnings with a best fit line
+# Same formatting as previous visualization
+>>>>>>> Stashed changes
 ggplot(result_clean, aes(x = Avg_Goal, y = Total_Earnings)) +
   geom_point(color = "blue", alpha = 0.7, size = 3) +
   labs(
@@ -85,6 +188,7 @@ ggplot(result_clean, aes(x = Avg_Goal, y = Total_Earnings)) +
   theme_minimal() + 
   geom_smooth(method = "lm", se = FALSE, color = "red")
 
+<<<<<<< Updated upstream
 ggplot(result_clean, aes(x = Avg_Assist, y = Total_Earnings)) +
   geom_point(color = "blue", alpha = 0.7, size = 3) +
   labs(
@@ -124,3 +228,5 @@ ggplot(result_clean, aes(x = Shot_Percentage, y = Total_Earnings)) +
   ) +
   theme_minimal() + 
   geom_smooth(method = "lm", se = FALSE, color = "red")
+=======
+>>>>>>> Stashed changes
