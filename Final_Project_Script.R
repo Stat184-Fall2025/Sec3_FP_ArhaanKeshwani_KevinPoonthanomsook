@@ -67,7 +67,7 @@ result_clean <- result_data %>%
   )
 
 
-# Code Chunk 3 - [Add description here]
+# Code Chunk 3 - Descriptive Analysis
 # Written by: Kevin Poonthanomsook, Reviewed by: Arhaan Keshwani
 
 # Select all columns except 'Player', then reshape data from wide to long format
@@ -131,7 +131,6 @@ summaryStats %>%
     full_width = FALSE
   )
 
-
 # Code Chunk 4 - Exploratory Data Analysis 1
 # Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 
@@ -161,3 +160,51 @@ ggplot(result_clean, aes(x = Avg_Goal, y = Total_Earnings)) +
   ) +
   theme_minimal() + 
   geom_smooth(method = "lm", se = FALSE, color = "red")
+
+# Code Chunk 5 - Correlation Analysis
+# Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
+# Calculate correlation of each metric with Total_Earnings and display a formatted table
+
+correlation_table <- result_clean %>%
+  select(-Player) %>%  # Remove non-numeric Player column before correlation calculation
+  summarise(
+    across(
+      everything(),
+      ~ cor(.x, Total_Earnings, use = "complete.obs")  # Compute correlation with Total_Earnings, ignoring missing values
+    )
+  ) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "Metric",
+    values_to = "Correlation_with_Earnings"
+  ) %>% 
+  filter(Metric != "Total_Earnings") %>%  # Remove correlation of Total_Earnings with itself
+  mutate(
+    # Replace raw metric column names with more readable labels
+    Metric = recode(
+      Metric,
+      Games_Played    = "Games Played",
+      Avg_Score       = "Average Score",
+      Avg_Goal        = "Average Goals",
+      Avg_Assist      = "Average Assists",
+      Avg_Save        = "Average Saves",
+      Avg_Shot        = "Average Shots",
+      Shot_Percentage = "Shot Percentage"
+    )
+  ) %>%
+  mutate(
+    # Format correlation values to fixed 3 decimal places
+    Correlation_with_Earnings = formatC(Correlation_with_Earnings, format = "f", digits = 3)
+  )
+
+# Create a nicely styled HTML table with Bootstrap options for display
+correlation_table %>%
+  kable(
+    format = "html",
+    caption = "Correlation of Metrics with Total Earnings",
+    align = "lcccccc"  # Align columns (left for Metric, center others)
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),  # Adds striped rows, hover effect, and compact style
+    full_width = FALSE  # Table width adjusts to content size
+  )
