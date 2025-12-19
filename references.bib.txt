@@ -1,0 +1,14 @@
+@misc{rocketleagueEsportsEarnings,
+  title        = {Rocket League :: Esports Earnings},
+  howpublished = {Website},
+  year         = {2025},
+  note         = {Accessed December 14, 2025},
+  url          = {https://www.esportsearnings.com/games/409-rocket-league}
+}
+@misc{RLCSGoogleSheet,
+  title        = {RLCS 2022-2023 Hub Sheet for Stats},
+  howpublished = {Google Sheets},
+  year         = {2025},
+  note         = {Accessed December 18, 2025},
+  url          = {https://docs.google.com/spreadsheets/d/1xdJ4JK3ndQOVqMjM4oke5Jtg9hcOpAmhXVvB_dYgXgM}
+}
