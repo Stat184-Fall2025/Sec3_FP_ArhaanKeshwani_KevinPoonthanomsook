@@ -1,0 +1,35 @@
+---
+title: "Rocket League Pro Performance & Earnings Analysis"
+author: "Arhaan Keshwani and Kevin Poonthanomsook"
+date: "December 14, 2025"
+date-modified: now
+format: pdf
+---
+
+# Introduction
+
+This project analyzes in-game stats of professional Rocket League players alongside their tournament earnings to investigate how measurable stats relate to success measured through earnings. The goal is to uncover trends, correlations, and predictors of earnings, providing insights for esports analysts, and fans interested in understanding what performance factors "matter most" at a pro level.
+
+We chose to use exploratory data analysis primarily for deriving insights from our data since we are only looking for general patterns and do not need confirmatory data analysis for performing rigorous hypothesis testing. We also chose to use tidyverse styling rather than base R since it offers an efficient and more concise way to work with and wrangle data.
+
+## FAIR and CARE Principles
+
+The EsportsEarnings Rocket League dataset fits well with the FAIR principles, as it is easy to find through a public webpage, accessible without restrictions. It’s also presented in a structured format with clear identifiers and can be integrated with other datasets such as in-game performance statistics. Earnings are reported consistently in USD, making the data reusable for exploratory analysis when properly attributed. From a CARE perspective, the dataset provides collective benefit by supporting analysis of esports earnings and competitive success, but it also requires responsible use, as players do not have direct control over how their publicly reported earnings are interpreted. Ethical analysis therefore involves acknowledging limitations, avoiding misleading comparisons or judgments based solely on earnings, and clearly communicating context and intent when presenting results.
+
+The RLCS career player data is easy to find and access since it comes from a public Google Sheet with clearly organized rows for players and columns for different in-game statistics. The data can be reused and combined with other sources, like earnings data, because the stats are consistently structured and many columns represent averages per game, even when not explicitly labeled. Since this dataset includes real players, it is essential to use the data responsibly, prioritizing fairness by focusing on overall trends rather than judging or ranking individuals, and acknowledging any potential biases or limitations in the data. Additionally, care should be taken to respect players’ privacy and to communicate findings sensitively, avoiding unfair or misleading conclusions that could harm players’ reputations. The goal is to better understand patterns in professional Rocket League performance while being clear about what the data represents and treating the individuals behind the data with respect.
+
+# Exploratory Data Analysis
+
+Description
+
+# Author Contribution
+
+Arhaan worked on ...
+
+Kevin worked on ...
+
+{{< pagebreak >}}
+# Code Appendix
+
+```{r codeAppend, ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```
