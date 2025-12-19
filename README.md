@@ -2,12 +2,8 @@
 
 This repo examines professional Rocket League players’ in-game stats and compares them with their earnings to identify performance trends.
 
-Write a 1-2 sentences that quickly and clearly convey what your repo is for.
-
 ## Overview
 This project analyzes in-game stats of professional Rocket League players alongside their tournament earnings to investigate how measurable stats relate to success measured through earnings. The goal is to uncover trends, correlations, and predictors of earnings, providing insights for esports analysts, and fans interested in understanding what performance factors "matter most" at a pro level.
-
-Expand on those introductory sentences with a brief but informative description of your project's purpose and goals. This section should help visitors decide whether they should dig deeper into your repo/project.
 
 ### Interesting Insight (Optional)
 
@@ -15,11 +11,8 @@ This is optional but highly recommended. You'll include one interesting insight 
 
 ## Data Sources and Acknowledgements
 
-
 Rocket League pro player earnings data: https://www.esportsearnings.com/games/409-rocket-league
 Rocket League pro player in-game stats: https://docs.google.com/spreadsheets/d/1XeDEL-1jZ-P4gTezOREV11O4bRiFXlBXRhc1tXSPx1g/edit?gid=139406561#gid=139406561
-
-Be sure to list where you got any data used within the project. Be sure to acknowledge any one whose work or elements you're drawing upon.
 
 ## Current Plan
 
@@ -37,7 +30,6 @@ Setup our Github Repository
 Setup our QMD file
 1. Using R create a QMD file and make sure the output is set to a PDF file
 2. Write out a YAML header with appropriate parameters such as title and authors
-3. 
 
 Initial Exploratory data analysis
 1. Here we are looking to get familiar with our data before moving past EDA
@@ -54,23 +46,22 @@ Work in Progress presentation
 6. Present
 
 Final Exploratory data analysis
-1. First, we create a table of the five-number summary statistics to gain further insight into the data
-2. 
+1. Per instructions of our assignment we need to create two more tables and one more data visualization
+2. First create a summary table of in game statistics of pro players
+3. Next create a correlation table that shows how each in game statistic is correlated to total earnings
+4. Finally create a scatterplot that visualizes the performance and earnings of players, showing the relationship between their average goals, average assists, earnings, and average saves
 
-   
+Create the final QMD file
+1. Add code chunks for each of our visualizations
+2. Make sure there's captions, alt text, and narrataive text
+3. Add a code appendix
+4. Add citations
+5. Render as PDF and submit
 
-
-
-
-
-
-Provide some information about what you intend to do with the project. You can additionally refer the visitor to your detailed plan document.
 
 ## Repo Structure
 
-
-
-Use this section to explain the structure of your repo. This should help visitors quickly figure out where they should look to find certain elements. Further, you can use this space to highlight and briefly explain important/key files in the repo.
+This repo has a main branch for stable, tested code, and two separate branches, one for each developer to work independently. Developers make changes on their branches and merge into main once ready.
 
 
 ## Authors
@@ -81,4 +72,3 @@ Email: ask6023@psu.edu
 Kevin Poonthanomsook
 Email: kzp5692@psu.edu
 
-Give information about who are the authors of the project and how people can get in touch if they have questions.
