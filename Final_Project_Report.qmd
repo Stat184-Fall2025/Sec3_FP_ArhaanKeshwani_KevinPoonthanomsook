@@ -1,0 +1,27 @@
+---
+title: "Rocket League Pro Performance & Earnings Analysis"
+author: "Arhaan Keshwani and Kevin Poonthanomsook"
+date: "December 14, 2025"
+date-modified: now
+format: pdf
+---
+
+# Introduction
+
+Our project is about...
+
+We chose to use exploratory data analysis primarily for deriving insights from our data since we are only looking for general patterns and do not need confirmatory data analysis for performing rigorous hypothesis testing. We also chose to use tidyverse styling rather than base R since it offers an efficient and more concise way to work with and wrangle data.
+
+# Exploratory Data Analysis
+
+Description
+
+# Author Contribution
+
+Description
+
+{{< pagebreak >}}
+# Code Appendix
+
+```{r codeAppend, ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```
