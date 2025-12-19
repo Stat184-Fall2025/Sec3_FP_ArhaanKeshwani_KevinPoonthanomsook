@@ -67,7 +67,7 @@ result_clean <- result_data %>%
   )
 
 
-# Code Chunk 3 - Descriptive and Correlation Analysis
+# Code Chunk 3 - Descriptive Analysis
 # Written by: Kevin Poonthanomsook, Reviewed by: Arhaan Keshwani
 
 # Select all columns except 'Player', then reshape data from wide to long format
@@ -131,7 +131,38 @@ summaryStats %>%
     full_width = FALSE
   )
 
+# Code Chunk 4 - Exploratory Data Analysis 1
+# Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 
+# Plot a scatterplot of average score vs. total earnings with a best fit line
+ggplot(result_clean, aes(x = Avg_Score, y = Total_Earnings)) +
+  # Create scatterplot
+  geom_point(color = "blue", alpha = 0.7, size = 3) +
+  # Apply axis labels and title
+  labs(
+    title = "Avg Score vs Total Earnings",
+    x = "Average Score",
+    y = "Total Earnings (USD)"
+  ) +
+  # Make theme minimal for easier viewing
+  theme_minimal() + 
+  # Create line of best fit for scatter
+  geom_smooth(method = "lm", se = FALSE, color = "red")
+
+# Plot a scatterplot of average goal vs. total earnings with a best fit line
+# Same formatting as previous visualization
+ggplot(result_clean, aes(x = Avg_Goal, y = Total_Earnings)) +
+  geom_point(color = "blue", alpha = 0.7, size = 3) +
+  labs(
+    title = "Avg Goals vs Total Earnings",
+    x = "Average Goals",
+    y = "Total Earnings (USD)"
+  ) +
+  theme_minimal() + 
+  geom_smooth(method = "lm", se = FALSE, color = "red")
+
+# Code Chunk 5 - Correlation Analysis
+# Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 # Calculate correlation of each metric with Total_Earnings and display a formatted table
 
 correlation_table <- result_clean %>%
@@ -177,35 +208,3 @@ correlation_table %>%
     bootstrap_options = c("striped", "hover", "condensed"),  # Adds striped rows, hover effect, and compact style
     full_width = FALSE  # Table width adjusts to content size
   )
-
-
-
-# Code Chunk 4 - Exploratory Data Analysis 1
-# Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
-
-# Plot a scatterplot of average score vs. total earnings with a best fit line
-ggplot(result_clean, aes(x = Avg_Score, y = Total_Earnings)) +
-  # Create scatterplot
-  geom_point(color = "blue", alpha = 0.7, size = 3) +
-  # Apply axis labels and title
-  labs(
-    title = "Avg Score vs Total Earnings",
-    x = "Average Score",
-    y = "Total Earnings (USD)"
-  ) +
-  # Make theme minimal for easier viewing
-  theme_minimal() + 
-  # Create line of best fit for scatter
-  geom_smooth(method = "lm", se = FALSE, color = "red")
-
-# Plot a scatterplot of average goal vs. total earnings with a best fit line
-# Same formatting as previous visualization
-ggplot(result_clean, aes(x = Avg_Goal, y = Total_Earnings)) +
-  geom_point(color = "blue", alpha = 0.7, size = 3) +
-  labs(
-    title = "Avg Goals vs Total Earnings",
-    x = "Average Goals",
-    y = "Total Earnings (USD)"
-  ) +
-  theme_minimal() + 
-  geom_smooth(method = "lm", se = FALSE, color = "red")
