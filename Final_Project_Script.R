@@ -8,8 +8,10 @@ library(googlesheets4)
 library(rvest)
 library(knitr)
 library(kableExtra)
+library(scales)
+library(ggrepel)
 
-# Use googlesheets4 library to import pro play  er in-game stats
+# Use googlesheets4 library to import pro player in-game stats
 gs4_deauth()
 sheet_url <- "https://docs.google.com/spreadsheets/d/1XeDEL-1jZ-P4gTezOREV11O4bRiFXlBXRhc1tXSPx1g/edit?gid=139406561#gid=139406561"
 
@@ -131,7 +133,32 @@ summaryStats %>%
     full_width = FALSE
   )
 
-# Code Chunk 4 - Exploratory Data Analysis 1
+
+# Code Chunk 4 - Goals vs. Assists Bubble Visualization
+# Written by: Kevin Poonthanomsook, Reviewed by: Arhaan Keshwani
+
+# Plot a bubble plot of goals vs. assists
+ggplot(result_clean, aes(
+  x = Avg_Goal,          # Average goals per game
+  y = Avg_Assist,        # Average assists per game
+  size = Avg_Save,       # Bubble size represents defensive contribution
+  color = Total_Earnings # Color gradient shows total earnings
+)) +
+  geom_point(alpha = 0.75) +                 # Semi-transparent points to reduce overlap
+  scale_size_continuous(range = c(3, 12)) +  # Control bubble size range
+  scale_color_viridis_c(labels = dollar) +   # Perceptually uniform color scale for earnings
+  labs(
+    title = "Rocket League Pros: Goals vs Assists",
+    subtitle = "Bubble size = Avg Saves | Color = Total Earnings",
+    x = "Average Goals per Game",
+    y = "Average Assists per Game",
+    size = "Avg Saves",
+    color = "Total Earnings"
+  ) +
+  theme_minimal(base_size = 12)               # Clean theme for EDA
+
+
+# Code Chunk 5 - Scatterplots of Goals vs. Earnings and Score vs. Earnings
 # Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 
 # Plot a scatterplot of average score vs. total earnings with a best fit line
@@ -161,7 +188,7 @@ ggplot(result_clean, aes(x = Avg_Goal, y = Total_Earnings)) +
   theme_minimal() + 
   geom_smooth(method = "lm", se = FALSE, color = "red")
 
-# Code Chunk 5 - Correlation Analysis
+# Code Chunk 6 - Correlation Analysis
 # Written by: Arhaan Keshwani, Reviewed by: Kevin Poonthanomsook
 # Calculate correlation of each metric with Total_Earnings and display a formatted table
 
